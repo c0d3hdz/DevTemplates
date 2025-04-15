@@ -1,0 +1,27 @@
+---
+import Line from '../assets/llline.svg';
+import { getCollection } from 'astro:content';
+import Feature from '../components/Feature.astro';
+
+const templates = await getCollection('templates');
+const featured = templates.filter((item) => item.data.featured);
+
+
+---
+<section class="text-center py-16 mt-24 mb-60 relative justify-center items-center">
+	<h2 id="Destacado" class="mb-48 text-6xl font-bold block text-center bg-gradient-to-l from-45% from-blue-900 to-65% to-blue-950 bg-clip-text text-transparent">Destacados</h2>
+	<span class="absolute -z-10 -top-36 right-2/6">  <Line  width={600} height={600} /></span>
+	
+	<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-4">
+		{featured.map(template => (
+		<Feature
+			title={template.data.title}
+			description={template.data.description}
+			tech={template.data.tech}
+			image={template.data.image}
+			repo={template.data.repo}
+			demo={template.data.demo}
+		/>
+		))}
+	</div>
+</section>
